@@ -15,10 +15,11 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getFlights();
+    console.log(this.flights);
   }
 
-  getFlights() {
-    this.flights = this.flightsService.getFlights();
+  getFlights():void  {
+    this.flightsService.getFlights().subscribe(flights => {this.flights = flights as Flight[]});
 
   }
 

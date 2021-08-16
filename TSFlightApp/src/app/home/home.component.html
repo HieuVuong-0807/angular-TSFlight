@@ -19,7 +19,7 @@
                             <option value="lax" >Los Angeles</option>
                         </select>
                     </div>
-                    <div class="search_box">
+                    <div class="search_..box">
                         <button>Go</button>
                     </div>
 
@@ -32,7 +32,7 @@
                         <div class="nonstop cell">Nonstop</div>
                     </div>
                     <div *ngFor="let flight of flights" class="flight_results">
-                        <div class="flight_number cell">{{flight.flightNumber}}</div>
+                        <div class="flight_number cell">{{flight.flightnumber}}</div>
                         <div class="depart cell">{{flight.depart | date : 'shortDate'}}</div>
                         <div class="arrive cell">{{flight.arrive | date : 'shortDate'}}</div>
                         <div class="nonstop cell">{{flight.nonstop}}</div>
