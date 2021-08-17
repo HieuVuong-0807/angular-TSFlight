@@ -16,6 +16,7 @@ export class FlightsService {
   constructor(private http: HttpClient) { }
 
   getFlights(): Observable<any> {
+    //This is a comment
     return this.http.get('http://localhost:3000/flights');
   }
 
