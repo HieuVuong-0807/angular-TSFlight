@@ -16,12 +16,15 @@ export class FlightsService {
   constructor(private http: HttpClient) { }
 
   getFlights(): Observable<any> {
-    //This is a comment
-    //This is a second comment
     return this.http.get('http://localhost:3000/flights');
   }
 
+  getFlightsTrip(orig: string, dest: string): Observable<any> {
+    return this.http.get(`http://localhost:3000/flights/query/${orig}/${dest}`);
+  }
+
   postFlight(flight: Flight) {
+    return this.http.post('http://localhost:3000/flights', flight).subscribe(data => console.log('Posted flight to fligh admin backend'));
 
   }
 

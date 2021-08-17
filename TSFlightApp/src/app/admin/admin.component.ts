@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FlightsService } from '../flights.service';
+import { Flight } from '../flight';
 
 @Component({
   selector: 'app-admin',
@@ -7,9 +9,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  constructor() { }
+  origin!: string;
+  destination!: string;
+  flightnumber!: number;
+  depart!: Date;
+  arrive!: Date;
+  nonstop: boolean = false;
+
+  constructor(private flightService: FlightsService) { }
 
   ngOnInit(): void {
+  }
+
+  sendFlight() {
+    const flight: Flight = {
+      origin: this.origin,
+      destination: this.destination,
+      flightnumber: this.flightnumber,
+      depart: this.depart,
+      arrive: this.arrive,
+      nonstop: this.nonstop
+    }
+
+    this.flightService.postFlight(flight);
+  }
+
+  toggleNonstop() {
+    this.nonstop = !this.nonstop;
   }
 
 }

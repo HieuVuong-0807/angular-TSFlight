@@ -10,17 +10,23 @@ import { FlightsService } from '../flights.service';
 export class HomeComponent implements OnInit {
 
   flights: Flight[] = [];
+  selectedOrigin: string = "";
+  selectedDestination: string = "";
 
   constructor(private flightsService: FlightsService) { }
 
   ngOnInit(): void {
-    this.getFlights();
-    console.log(this.flights);
   }
 
   getFlights():void  {
     this.flightsService.getFlights().subscribe(flights => {this.flights = flights as Flight[]});
 
+  }
+
+  query(): void {
+    const origin = this.selectedOrigin;
+    const destination = this.selectedDestination;
+    this.flightsService.getFlightsTrip(origin, destination).subscribe(flights => {this.flights = flights as Flight[]})
   }
 
 }
