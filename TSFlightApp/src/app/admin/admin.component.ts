@@ -16,9 +16,12 @@ export class AdminComponent implements OnInit {
   arrive!: Date;
   nonstop: boolean = false;
 
+  flightList: Flight[] = [];
+
   constructor(private flightService: FlightsService) { }
 
   ngOnInit(): void {
+    this.getAllFlight();
   }
 
   sendFlight() {
@@ -36,6 +39,10 @@ export class AdminComponent implements OnInit {
 
   toggleNonstop() {
     this.nonstop = !this.nonstop;
+  }
+
+  getAllFlight(): void {
+    this.flightService.getFlights().subscribe(flights => this.flightList = flights);
   }
 
 }

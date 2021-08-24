@@ -13,22 +13,32 @@ export class FlightsService {
     {origin: "New York", destination: "Los Angeles", flightnumber: 432, depart: new Date("2016-01-05T09:05:05.035Z"), arrive: new Date("2016-01-05T09:05:05.035Z"), nonstop: false},
   ];
 
-  constructor(private http: HttpClient) { }
+  backEndUrl: string = "http://localhost:3000";
+
+  constructor(private httpClient: HttpClient) { }
 
   getFlights(): Observable<any> {
-    return this.http.get('http://localhost:3000/flights');
+    return this.httpClient.get(`${this.backEndUrl}/flights`);
   }
 
   getFlightsTrip(orig: string, dest: string): Observable<any> {
-    return this.http.get(`http://localhost:3000/flights/query/${orig}/${dest}`);
+    return this.httpClient.get(`${this.backEndUrl}/flights/query/${orig}/${dest}`);
   }
 
   postFlight(flight: Flight) {
-    return this.http.post('http://localhost:3000/flights', flight).subscribe(data => console.log('Posted flight to fligh admin backend'));
+    return this.httpClient.post(`${this.backEndUrl}/flights`, flight).subscribe(data => console.log('Posted flight to fligh admin backend'));
 
   }
 
   deleteFlight(id: number) {
     
+  }
+
+  getAllOrigin(): Observable<any> {
+    return this.httpClient.get(`${this.backEndUrl}/flights/cities/origin`);
+  }
+
+  getAllDestination(): Observable<any> {
+    return this.httpClient.get(`${this.backEndUrl}/flights/cities/destination`);
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Flight } from '../flight';
 import { FlightsService } from '../flights.service';
 
@@ -12,10 +13,15 @@ export class HomeComponent implements OnInit {
   flights: Flight[] = [];
   selectedOrigin: string = "";
   selectedDestination: string = "";
+  filteredOriginList: any[] = [];
+  filteredDestinationList: any[] = [];
+  
 
   constructor(private flightsService: FlightsService) { }
 
   ngOnInit(): void {
+    this.getOriginList();
+    this.getDestinationList();
   }
 
   getFlights():void  {
@@ -28,5 +34,14 @@ export class HomeComponent implements OnInit {
     const destination = this.selectedDestination;
     this.flightsService.getFlightsTrip(origin, destination).subscribe(flights => {this.flights = flights as Flight[]})
   }
+
+  getOriginList(): void {
+    this.flightsService.getAllOrigin().subscribe(origin => this.filteredOriginList = origin);
+  }
+
+  getDestinationList(): void {
+    this.flightsService.getAllDestination().subscribe(destination => this.filteredDestinationList = destination);
+  }
+
 
 }

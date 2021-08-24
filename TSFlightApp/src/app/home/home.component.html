@@ -6,21 +6,20 @@
                     <div class="search_box">
                         <select [(ngModel)]="selectedOrigin">
                             <option value="" disabled selected>From:</option>
-                            <option value="nyc" >New York</option>
-                            <option value="london" >London</option>
-                            <option value="lax" >Los Angeles</option>
+                            <option *ngFor="let result of filteredOriginList; let i=index" value={{result.origin}}>{{result.origin}}</option>
                         </select>
                     </div>
                     <div class="search_box">
                         <select [(ngModel)]="selectedDestination">
                             <option value="" disabled selected>To:</option>
-                            <option value="nyc" >New York</option>
-                            <option value="london" >London</option>
-                            <option value="lax" >Los Angeles</option>
+                            <option *ngFor="let result of filteredDestinationList; let i=index" value={{result.destination}}>{{result.destination}}</option>
                         </select>
                     </div>
                     <div class="search_box">
                         <button (click)="query()">Go</button>
+                    </div>
+                    <div class="search_box">
+                        <button (click)="getFlights()">List all Flights</button>
                     </div>
 
                 </div>
