@@ -26,12 +26,8 @@ export class FlightsService {
   }
 
   postFlight(flight: Flight) {
-    return this.httpClient.post(`${this.backEndUrl}/flights`, flight).subscribe(data => console.log('Posted flight to fligh admin backend'));
+    return this.httpClient.post(`${this.backEndUrl}/flights`, flight);
 
-  }
-
-  deleteFlight(id: number) {
-    
   }
 
   getAllOrigin(): Observable<any> {
@@ -40,5 +36,13 @@ export class FlightsService {
 
   getAllDestination(): Observable<any> {
     return this.httpClient.get(`${this.backEndUrl}/flights/cities/destination`);
+  }
+
+  deleteFlight(flight: Flight): Observable<any> {
+    return this.httpClient.post(`${this.backEndUrl}/flights/${flight.id}/delete`, null);
+  }
+
+  updateFlight(flight: Flight): Observable<any> {
+    return this.httpClient.post(`${this.backEndUrl}/flights/${flight.id}/update`, flight);
   }
 }

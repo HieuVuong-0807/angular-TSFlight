@@ -34,7 +34,7 @@ export class AdminComponent implements OnInit {
       nonstop: this.nonstop
     }
 
-    this.flightService.postFlight(flight);
+    this.flightService.postFlight(flight).subscribe(data => console.log('Posted flight to fligh admin backend'));
   }
 
   toggleNonstop() {
@@ -43,6 +43,24 @@ export class AdminComponent implements OnInit {
 
   getAllFlight(): void {
     this.flightService.getFlights().subscribe(flights => this.flightList = flights);
+  }
+
+  delete(flight: Flight): void {
+    if (window.confirm('Are you sure you want to delete thisi flight? ')) {
+      this.flightService.deleteFlight(flight).subscribe(data => {
+        if(data && data['affected']) {
+          this.getAllFlight(); //To refresh list of flight
+        }
+      });
+    }  
+  }
+
+  update(flight: Flight): void {
+    this.flightService.updateFlight(flight).subscribe(data => {
+      if (data && data['affected']) {
+        this.getAllFlight(); //To Refresh list of updated flight
+      }
+    });
   }
 
 }
